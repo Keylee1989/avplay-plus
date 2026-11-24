@@ -224,22 +224,48 @@
   }
 
   /* ---- download tab: magnet copy + PikPak external ---- */
-  function downloadDialog() {
+  function downloadDialog(prefill) {
     var wrap = el('div');
+    var emuleBase = A.store.get('emuleBase', '');
     wrap.innerHTML =
-      '<p class="hint">磁力只做复制 + PikPak 外跳，不直接播。WebRTC 种子常 0 peers，播不了请用外跳。</p>' +
+      '<p class="hint">浏览器不能直接播 ed2k（电驴是 P2P 协议，不是 HTTP）。真正能在线播的办法：' +
+      '① 离线网盘/迅雷先下到云端拿 HTTP 地址；② 电脑跑 eMule/aMule 开 Web 界面，边下边预览。</p>' +
       '<input id="mgUrl" style="width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:9px" placeholder="粘贴 magnet: / ed2k: 链接">' +
-      '<div class="row" style="margin-top:10px"><button class="btn small" id="mgCopy">复制磁力</button>' +
-      '<button class="btn small primary" id="mgPik">PikPak 外跳</button></div>';
-    $('#mgCopy', wrap).addEventListener('click', function () {
-      var v = $('#mgUrl', wrap).value.trim(); if (!v) return A.toast('先粘贴链接');
-      A.copy(v);
-    });
+      '<div class="row" style="margin-top:10px"><button class="btn small" id="mgCopy">复制</button>' +
+      '<button class="btn small primary" id="mgPik">PikPak 外跳</button>' +
+      '<button class="btn small" id="mgEmule">eMule Web 试播</button></div>' +
+      '<div class="divider"></div>' +
+      '<p class="hint" style="font-weight:600">eMule / aMule Web UI 地址</p>' +
+      '<input id="emuleBase" style="width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:9px" placeholder="http://电脑IP:端口/  本机存，不上传" value="' + A.esc(emuleBase) + '">' +
+      '<p class="hint">电脑开启 eMule 的 WebServer（aMule 开 Web UI），同一 Wi‑Fi 下填上面地址即可试播已下载/预览中的文件。' +
+      'PikPak 主要支持 magnet/HTTP，ed2k 支持情况需你自己实测；本 App 不假设任何第三方转换站可用。</p>' +
+      '<div class="row" style="margin-top:8px"><button class="btn small" id="emuleSave">保存地址</button></div>';
+
+    function urlVal() {
+      var v = $('#mgUrl', wrap).value.trim();
+      if (!v) { A.toast('先粘贴链接'); return ''; }
+      return v;
+    }
+    $('#mgCopy', wrap).addEventListener('click', function () { var v = urlVal(); if (v) A.copy(v); });
     $('#mgPik', wrap).addEventListener('click', function () {
-      var v = $('#mgUrl', wrap).value.trim(); if (!v) return A.toast('先粘贴链接');
+      var v = urlVal(); if (!v) return;
       A.openExternal('pikpakapp://open/?url=' + encodeURIComponent(v));
     });
-    A.modal('下载 / 磁力', wrap);
+    $('#emuleSave', wrap).addEventListener('click', function () {
+      A.store.set('emuleBase', $('#emuleBase', wrap).value.trim());
+      A.toast('eMule Web 地址已存到本机');
+    });
+    $('#mgEmule', wrap).addEventListener('click', function () {
+      var v = urlVal(); if (!v) return;
+      if (!/^ed2k:\/\//i.test(v)) { A.toast('这个按钮用于 ed2k 链接；magnet 请用 PikPak'); return; }
+      var base = $('#emuleBase', wrap).value.trim() || A.store.get('emuleBase', '');
+      if (!/^https?:\/\//i.test(base)) { A.toast('先在上面填 eMule Web UI 地址', 'error'); return; }
+      // eMule Web UI serves files over HTTP; the player needs an HTTP URL, not ed2k itself.
+      A.toast('ed2k 需先在 eMule 里下载/预览，再用其 Web UI 给出的 HTTP 地址播放', 'info');
+      A.openExternal(base);
+    });
+    if (prefill) $('#mgUrl', wrap).value = prefill;
+    A.modal('ed2k / 磁力 · 下载与在线播放', wrap);
   }
   window.Download = { open: downloadDialog };
 
@@ -326,5 +352,8 @@
   }, 800);
 
   /* ---- expose ---- */
-  window.Extra = { isAd: isAd, mainPanel: mainPanel, chong: chongDialog, image: imageDialog, download: downloadDialog, cycleLock: cycleLock };
+  window.Extra = {
+    isAd: isAd, mainPanel: mainPanel, chong: chongDialog, image: imageDialog,
+    download: downloadDialog, ed2k: function (u) { downloadDialog(u || ''); }, cycleLock: cycleLock
+  };
 })();

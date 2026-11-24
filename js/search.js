@@ -467,11 +467,15 @@
     body.appendChild(ta);
     var row2 = el('div', 'modal-actions');
     var bCopy = el('button', 'btn primary', '复制链接');
+    var bHelper = el('button', 'btn', '在线播放助手');
     var bClose = el('button', 'btn ghost', '关闭');
-    row2.appendChild(bClose); row2.appendChild(bCopy);
+    row2.appendChild(bClose); row2.appendChild(bHelper); row2.appendChild(bCopy);
     body.appendChild(row2);
     var m = modal(row.code + ' · ' + type, body, { wide: true });
     bCopy.addEventListener('click', function () { copyText(row.link); });
+    bHelper.addEventListener('click', function () {
+      if (window.Extra && window.Extra.ed2k) window.Extra.ed2k(row.link);
+    });
     bClose.addEventListener('click', function () { if (m) m.hide(); });
   }
 
@@ -524,6 +528,11 @@
       var bCopy = el('button', 'btn ghost', '复制' + type + '链接');
       bCopy.addEventListener('click', function () { copyText(row.link); });
       actions.appendChild(bCopy);
+      var bHelper = el('button', 'btn ghost', '在线播放助手');
+      bHelper.addEventListener('click', function () {
+        if (window.Extra && window.Extra.ed2k) window.Extra.ed2k(row.link);
+      });
+      actions.appendChild(bHelper);
     }
     body.appendChild(actions);
 
