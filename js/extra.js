@@ -239,7 +239,11 @@
       '<input id="emuleBase" style="width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:9px" placeholder="http://电脑IP:端口/  本机存，不上传" value="' + A.esc(emuleBase) + '">' +
       '<p class="hint">电脑开启 eMule 的 WebServer（aMule 开 Web UI），同一 Wi‑Fi 下填上面地址即可试播已下载/预览中的文件。' +
       'PikPak 主要支持 magnet/HTTP，ed2k 支持情况需你自己实测；本 App 不假设任何第三方转换站可用。</p>' +
-      '<div class="row" style="margin-top:8px"><button class="btn small" id="emuleSave">保存地址</button></div>';
+      '<div class="row" style="margin-top:8px"><button class="btn small" id="emuleSave">保存地址</button></div>' +
+      '<div class="divider"></div>' +
+      '<p class="hint" style="font-weight:600">已有 HTTP 直链？直接播放</p>' +
+      '<input id="httpUrl" style="width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:9px" placeholder="http://电脑IP:8000/文件名.mp4 或网盘直链">' +
+      '<div class="row" style="margin-top:8px"><button class="btn small primary" id="httpPlay">用播放器打开</button></div>';
 
     function urlVal() {
       var v = $('#mgUrl', wrap).value.trim();
@@ -264,8 +268,18 @@
       A.toast('ed2k 需先在 eMule 里下载/预览，再用其 Web UI 给出的 HTTP 地址播放', 'info');
       A.openExternal(base);
     });
+    $('#httpPlay', wrap).addEventListener('click', function () {
+      var u = $('#httpUrl', wrap).value.trim();
+      if (!/^https?:\/\//i.test(u)) { A.toast('填 http(s) 直链', 'error'); return; }
+      A.addHistory({ title: u, url: u, type: 'play' });
+      if (window.Player && Player.play) {
+        m.hide();
+        window.App && App.show('play');
+        setTimeout(function () { Player.play(u, { title: u, resumeKey: 'play:' + u }); }, 60);
+      } else A.openExternal(u);
+    });
     if (prefill) $('#mgUrl', wrap).value = prefill;
-    A.modal('ed2k / 磁力 · 下载与在线播放', wrap);
+    var m = A.modal('ed2k / 磁力 · 下载与在线播放', wrap);
   }
   window.Download = { open: downloadDialog };
 
