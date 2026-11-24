@@ -6,6 +6,7 @@
 
   var TABS = [
     { id: 'home', name: '聚合', ic: '🏠' },
+    { id: 'recommend', name: '推荐', ic: '✨' },
     { id: 'ltx', name: 'LTX库', ic: '💎' },
     { id: 'sub', name: '字幕', ic: '📄' },
     { id: 'play', name: '播放', ic: '▶️' },
@@ -59,6 +60,7 @@
     try {
       switch (tab) {
         case 'home': renderHome(v); break;
+        case 'recommend': renderRecommend(v); break;
         case 'ltx': renderLtx(v); break;
         case 'sub': renderSub(v); break;
         case 'play': renderPlay(v); break;
@@ -83,6 +85,7 @@
         '<p class="hint" id="homeHint">输入番号或片名，一键查 ' + (A.D.sites || []).length + ' 个站 · ' +
         (A.D.subtitleSites || []).length + ' 个字幕源 · LTX ' + (A.LTX || []).length + ' 部离线片库。</p>' +
         '<div class="row" style="margin-top:10px">' +
+          '<button class="btn small" id="homeRec">✨ 推荐</button>' +
           '<button class="btn small" id="homeLtx">浏览 LTX 片库</button>' +
           '<button class="btn small ghost" id="homeImport">导入我的资源</button>' +
           '<span class="statusdot" id="adblockState"></span>' +
@@ -90,6 +93,7 @@
         '</div>' +
       '</div>' +
       '<div id="homeResult"></div>';
+    $('#homeRec').addEventListener('click', function () { show('recommend'); });
     $('#homeLtx').addEventListener('click', function () { show('ltx'); });
     $('#homeImport').addEventListener('click', importDialog);
 
@@ -113,6 +117,57 @@
         b.addEventListener('click', function () { $('#globalSearch').value = b.dataset.q; doSearch(); });
       });
     }
+  }
+
+  /* ---------------- 推荐 / 为你推荐 ---------------- */
+  function renderRecommend(v) {
+    var best = (A.LTX || []).slice().sort(function (a, b) {
+      return (Number(b[6]) || 0) - (Number(a[6]) || 0);
+    });
+    var withSub = best.filter(function (r) { return r[8] && /\.srt/i.test(String(r[8])); });
+    function card(r) {
+      var code = r[0], title = r[1] || code, cover = r[5], score = r[6], sub = r[8];
+      return '<button class="card rc-card" data-code="' + A.esc(code) + '">' +
+        (cover ? '<img class="cover" src="' + A.esc(cover) + '" referrerpolicy="no-referrer" loading="lazy">' : '<div class="cover" style="display:grid;place-items:center;color:var(--mute)">暂无封面</div>') +
+        '<div class="body"><div class="t">' + A.esc(title) + '</div>' +
+        '<div class="m"><span>' + A.esc(code) + '</span><span>★ ' + A.esc(score || '—') + '</span></div>' +
+        (sub ? '<span class="badge sub">有字幕</span>' : '') + '</div></button>';
+    }
+    var hist = A.history().filter(function (h) { return h.code; }).slice(0, 6);
+    v.innerHTML =
+      '<div class="ag-hero"><h2>为你推荐</h2>' +
+      '<p class="hint">基于脚本内置的 LTX 4310 部评分数据（本地离线，不联网、不追踪），以及你自己的观看历史。没有真实数据时不会编造推荐。</p>' +
+      '<div class="row" style="margin-top:10px">' +
+      '<button class="btn small" id="rcSearch">去聚合搜索</button>' +
+      '<button class="btn small ghost" id="rcBrowse">浏览 LTX 全库</button>' +
+      '<button class="btn small ghost" id="rcRank">看榜单</button></div></div>' +
+      '<div class="sec"><div class="sec-title">高分精选 <span class="cnt">按 LTX 评分排序 · 本地数据</span></div>' +
+      '<div class="grid">' + best.slice(0, 24).map(card).join('') + '</div></div>' +
+      '<div class="sec"><div class="sec-title">高分且带字幕直链 <span class="cnt">' + withSub.length + ' 部</span></div>' +
+      '<div class="grid">' + withSub.slice(0, 24).map(card).join('') + '</div></div>' +
+      (hist.length ? '<div class="sec"><div class="sec-title">继续观看 / 最近搜索</div><div class="chips">' +
+        hist.map(function (h) { return '<button class="chip" data-h="' + A.esc(h.code) + '">' + A.esc(h.code) + '</button>'; }).join('') + '</div></div>' : '') +
+      '<div class="sec"><div class="sec-title">JavRanking 总榜 <span class="cnt">接口数据，加载失败会明确提示</span></div><div id="rcRankBody"><p class="hint">加载中…</p></div></div>';
+
+    A.$$('#view-recommend [data-code]').forEach(function (b) {
+      b.addEventListener('click', function () { $('#globalSearch').value = b.dataset.code; doSearch(); show('home'); });
+    });
+    A.$$('#view-recommend [data-h]').forEach(function (b) {
+      b.addEventListener('click', function () { $('#globalSearch').value = b.dataset.h; doSearch(); show('home'); });
+    });
+    $('#rcSearch').addEventListener('click', function () { show('home'); $('#globalSearch').focus(); });
+    $('#rcBrowse').addEventListener('click', function () { show('ltx'); });
+    $('#rcRank').addEventListener('click', function () { show('rank'); });
+    if (window.Search && Search.javRankingTop) {
+      Search.javRankingTop('top', 0, 12).then(function (d) {
+        var body = $('#rcRankBody'); if (!body) return;
+        if (!d || !d.ok || !(d.items || []).length) { body.innerHTML = '<p class="hint">榜单暂不可用（不编造数据）。可去「榜单」页重试。</p>'; return; }
+        body.innerHTML = '<div class="list">' + d.items.map(function (it, i) {
+          return '<div class="li"><span class="badge">' + (i + 1) + '</span><div class="grow"><div class="t">' +
+            A.esc(it.title || it.code || '') + '</div><div class="s">' + A.esc(it.code || '') + '</div></div></div>';
+        }).join('') + '</div>';
+      });
+    } else { $('#rcRankBody').innerHTML = '<p class="hint">榜单模块未加载。</p>'; }
   }
 
   /* ---------------- LTX ---------------- */

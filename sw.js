@@ -1,5 +1,5 @@
 /* AvPlay+ service worker – offline app shell */
-var CACHE = 'avplay-plus-v1';
+var CACHE = 'avplay-plus-v2';
 var ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/app.css', './css/extra.css', './hls.min.js',

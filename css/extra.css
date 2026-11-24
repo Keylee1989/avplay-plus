@@ -1,4 +1,11 @@
 /* AvPlay+ · spec extras */
+/* Light theme: the floating quick bar panel stays dark, so its buttons need
+   an explicit light surface + dark text (var(--fg) is dark in light theme). */
+[data-theme="light"] .quickbar { background: rgba(18,22,32,.97); border-color: rgba(255,255,255,.2); }
+[data-theme="light"] .quickbar button { background: #f4f6fa !important; color: #151923 !important; }
+[data-theme="light"] .quickbar button .ic { color: #151923; }
+[data-theme="light"] .goldbtn { color: #3a2600; }
+.rc-card { text-align: left; }
 .qbar2 { display: grid !important; grid-template-columns: repeat(2, 56px); gap: 6px; }
 .qbar2 button { width: 56px !important; height: 48px !important; padding: 2px !important; font-size: .64rem !important; text-align: center !important; border-radius: 10px !important; }
 .goldbtn.dragging { opacity: .9 !important; }

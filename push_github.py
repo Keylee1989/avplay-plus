@@ -6,7 +6,7 @@ def run(c):
     if p.stdout.strip(): print(p.stdout.strip()[:1200])
     if p.returncode: sys.exit(p.returncode)
 run(['git','add','-A'])
-run(['git','commit','-q','-m','Add Cloudflare Pages proxy function and docs; final release'])
+run(['git','commit','-q','-m','Add recommendation page, fix light-theme quickbar contrast, bump SW cache'])
 url = 'https://x-access-token:%s@github.com/Keylee1989/avplay-plus.git' % T
 run(['git','push','-q',url,'main'])
 run(['git','remote','set-url','origin','https://github.com/Keylee1989/avplay-plus.git'])
