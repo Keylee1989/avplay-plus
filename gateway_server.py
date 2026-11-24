@@ -33,6 +33,13 @@ import urllib.request
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
+# 手机 / 局域网访问时，网关返回的 play_url 要用电脑的局域网地址，
+# 不能写死 127.0.0.1（那在手机上指手机自己）。启动时用 --public 指定。
+PUBLIC_BASE = ""
+
+def gateway_base(port):
+    return PUBLIC_BASE or f"http://127.0.0.1:{port}"
+
 HERE = Path(__file__).resolve().parent
 
 # ---------------------------------------------------------------- 常量
@@ -89,7 +96,7 @@ class Session:
         return rid
 
     def gateway_url(self, rid, port):
-        return f"http://127.0.0.1:{port}/gw/{self.id}/{rid}"
+        return f"{gateway_base(port)}/gw/{self.id}/{rid}"
 
     def get(self, rid):
         return self.resources.get(rid)
@@ -291,7 +298,7 @@ def build_play_response(url, headers, max_height, title, port, timeout=25):
     put_session(sess)
     return {
         "session": sess.id,
-        "play_url": f"http://127.0.0.1:{port}/gw/{sess.id}/{play_rid}",
+        "play_url": f"{gateway_base(port)}/gw/{sess.id}/{play_rid}",
         "kind": "hls" if is_manifest_body(body, ctype) else "file",
         "upstream_url": url,
         "renditions": renditions,
@@ -485,10 +492,13 @@ class Handler(BaseHTTPRequestHandler):
 
 def main():
     parser = argparse.ArgumentParser(description="AvPlay 网页播放网关")
-    parser.add_argument("--host", default="127.0.0.1", help="监听地址，默认 127.0.0.1（仅本机）")
+    parser.add_argument("--host", default="127.0.0.1", help="监听地址；手机访问要填 0.0.0.0")
     parser.add_argument("--port", type=int, default=8765, help="监听端口，默认 8765")
+    parser.add_argument("--public", default="", help="给手机用：填 http://电脑局域网IP:端口，网关返回的 play_url 会用这个地址")
     args = parser.parse_args()
 
+    global PUBLIC_BASE
+    PUBLIC_BASE = args.public.rstrip("/") if args.public else ""
     Handler.port = args.port
     server = ThreadingHTTPServer((args.host, args.port), Handler)
     server.daemon_threads = True

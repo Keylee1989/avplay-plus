@@ -255,15 +255,27 @@
       var v = urlVal(); if (!v) return;
       A.openExternal('pikpakapp://open/?url=' + encodeURIComponent(v));
     });
+    function normBase(v) {
+      v = String(v || '').trim();
+      if (v && !/^https?:\/\//i.test(v)) v = 'http://' + v;
+      return v.replace(/\/+$/, '');
+    }
     $('#emuleSave', wrap).addEventListener('click', function () {
-      A.store.set('emuleBase', $('#emuleBase', wrap).value.trim());
-      A.toast('eMule Web 地址已存到本机');
+      var v = normBase($('#emuleBase', wrap).value);
+      $('#emuleBase', wrap).value = v;
+      A.store.set('emuleBase', v);
+      A.toast('eMule Web 地址已存到本机：' + v);
     });
     $('#mgEmule', wrap).addEventListener('click', function () {
       var v = urlVal(); if (!v) return;
-      if (!/^ed2k:\/\//i.test(v)) { A.toast('这个按钮用于 ed2k 链接；magnet 请用 PikPak'); return; }
-      var base = $('#emuleBase', wrap).value.trim() || A.store.get('emuleBase', '');
-      if (!/^https?:\/\//i.test(base)) { A.toast('先在上面填 eMule Web UI 地址', 'error'); return; }
+      if (!/^ed2k:\/\//i.test(v)) {
+        A.confirm('这条是磁力链接，eMule 不认。是否改用 PikPak 外跳？', function () {
+          A.openExternal('pikpakapp://open/?url=' + encodeURIComponent(v));
+        });
+        return;
+      }
+      var base = normBase($('#emuleBase', wrap).value || A.store.get('emuleBase', ''));
+      if (!/^https?:\/\/[^\s]+$/i.test(base)) { A.toast('先在上面填 eMule Web UI 地址（如 http://192.168.0.18:8765）', 'error'); return; }
       // eMule Web UI serves files over HTTP; the player needs an HTTP URL, not ed2k itself.
       A.toast('ed2k 需先在 eMule 里下载/预览，再用其 Web UI 给出的 HTTP 地址播放', 'info');
       A.openExternal(base);
