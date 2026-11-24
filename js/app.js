@@ -386,7 +386,7 @@
       '<div class="set-row"><label>主题色</label><input type="text" id="setAccent" value="' + A.esc(s.accent) + '"></div>' +
       '<div class="set-row"><label>界面缩放</label><input type="number" id="setScale" min="80" max="140" value="' + s.scale + '"></div>' +
       '<div class="divider"></div><div class="sec-title">网络 / 播放</div>' +
-      '<div class="set-row"><label>CORS 代理<span class="desc">跨域抓取失败时填，如 https://corsproxy.io/? 或带 {url} 的模板</span></label><input type="text" id="setProxy" value="' + A.esc(s.proxy) + '" placeholder="留空则直连"></div>' +
+      '<div class="set-row"><label>CORS 代理<span class="desc">Cloudflare Pages 部署后填 https://你的项目.pages.dev/api/proxy?url= （结尾是 ?url=）；留空则直连</span></label><input type="text" id="setProxy" value="' + A.esc(s.proxy) + '" placeholder="留空则直连"></div>' +
       '<div class="set-row"><label>播放网关<span class="desc">可选，形如 https://你的网关</span></label><input type="text" id="setGateway" value="' + A.esc(s.gateway) + '"></div>' +
       toggle('autoplay', '自动播放', '部分浏览器会阻止，不保证生效') +
       toggle('adblock', '广告拦截', '拦截弹窗与常见广告域名') +
