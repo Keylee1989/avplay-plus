@@ -233,12 +233,13 @@
       '<input id="mgUrl" style="width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:9px" placeholder="粘贴 magnet: / ed2k: 链接">' +
       '<div class="row" style="margin-top:10px"><button class="btn small" id="mgCopy">复制</button>' +
       '<button class="btn small primary" id="mgPik">PikPak 外跳</button>' +
-      '<button class="btn small" id="mgEmule">eMule Web 试播</button></div>' +
+      '<button class="btn small" id="mgEmule">下载器 WebUI</button></div>' +
       '<div class="divider"></div>' +
-      '<p class="hint" style="font-weight:600">eMule / aMule Web UI 地址</p>' +
+      '<p class="hint" style="font-weight:600">下载器 Web UI 地址（magnet 用 qBittorrent/Transmission，ed2k 用 eMule/aMule）</p>' +
       '<input id="emuleBase" style="width:100%;background:var(--bg3);border:1px solid var(--line);border-radius:8px;padding:9px" placeholder="http://电脑IP:端口/  本机存，不上传" value="' + A.esc(emuleBase) + '">' +
-      '<p class="hint">电脑开启 eMule 的 WebServer（aMule 开 Web UI），同一 Wi‑Fi 下填上面地址即可试播已下载/预览中的文件。' +
-      'PikPak 主要支持 magnet/HTTP，ed2k 支持情况需你自己实测；本 App 不假设任何第三方转换站可用。</p>' +
+      '<p class="hint">magnet 最省事走 PikPak（云端直接支持）。要自己电脑播：qBittorrent 开 WebUI（默认 8080）或 Transmission（9091）加入磁链，' +
+      '下载目录跑 python -m http.server，把 http://电脑IP:端口/文件 贴到下面"直接播放"。' +
+      'ed2k 用 eMule/aMule；PikPak 对 ed2k 支持需实测。不假设第三方转换站可用。</p>' +
       '<div class="row" style="margin-top:8px"><button class="btn small" id="emuleSave">保存地址</button></div>' +
       '<div class="divider"></div>' +
       '<p class="hint" style="font-weight:600">已有 HTTP 直链？直接播放</p>' +
@@ -264,20 +265,14 @@
       var v = normBase($('#emuleBase', wrap).value);
       $('#emuleBase', wrap).value = v;
       A.store.set('emuleBase', v);
-      A.toast('eMule Web 地址已存到本机：' + v);
+      A.toast('下载器地址已存到本机：' + v);
     });
     $('#mgEmule', wrap).addEventListener('click', function () {
       var v = urlVal(); if (!v) return;
-      if (!/^ed2k:\/\//i.test(v)) {
-        A.confirm('这条是磁力链接，eMule 不认。是否改用 PikPak 外跳？', function () {
-          A.openExternal('pikpakapp://open/?url=' + encodeURIComponent(v));
-        });
-        return;
-      }
+      if (!/^(ed2k:\/\/|magnet:\?)/i.test(v)) { A.toast('这里只处理 ed2k:// 或 magnet:? 链接', 'error'); return; }
       var base = normBase($('#emuleBase', wrap).value || A.store.get('emuleBase', ''));
-      if (!/^https?:\/\/[^\s]+$/i.test(base)) { A.toast('先在上面填 eMule Web UI 地址（如 http://192.168.0.18:8765）', 'error'); return; }
-      // eMule Web UI serves files over HTTP; the player needs an HTTP URL, not ed2k itself.
-      A.toast('ed2k 需先在 eMule 里下载/预览，再用其 Web UI 给出的 HTTP 地址播放', 'info');
+      if (!/^https?:\/\/[^\s]+$/i.test(base)) { A.toast('先填下载器 Web UI 地址（如 http://192.168.0.18:8080）', 'error'); return; }
+      A.toast('在下载器里加入链接，下完后把 HTTP 地址贴到下面「直接播放」', 'info');
       A.openExternal(base);
     });
     $('#httpPlay', wrap).addEventListener('click', function () {
