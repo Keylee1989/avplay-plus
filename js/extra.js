@@ -63,6 +63,21 @@
     if (lockBtn) lockBtn.appendChild(el('span', 'ver-line', ''));
   }
   buildQuick();
+  // Belt-and-braces: apply the quick-bar contrast inline too, so even a stale
+  // cached stylesheet cannot make the floating buttons invisible in light theme.
+  function applyQuickTheme() {
+    var light = document.documentElement.getAttribute('data-theme') === 'light';
+    $$('#quickBar button').forEach(function (b) {
+      b.style.background = light ? '#f4f6fa' : '';
+      b.style.color = light ? '#151923' : '';
+    });
+    var panel = $('#quickBar');
+    if (panel) panel.style.background = light ? 'rgba(255,255,255,.97)' : '';
+  }
+  applyQuickTheme();
+  try {
+    new MutationObserver(applyQuickTheme).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  } catch (e) {}
 
   function qAction(a) {
     switch (a) {

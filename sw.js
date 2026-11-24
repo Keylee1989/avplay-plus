@@ -1,5 +1,5 @@
 /* AvPlay+ service worker – offline app shell */
-var CACHE = 'avplay-plus-v2';
+var CACHE = 'avplay-plus-v3';
 var ASSETS = [
   './', './index.html', './manifest.webmanifest', './icon.svg',
   './css/app.css', './css/extra.css', './hls.min.js',
@@ -20,13 +20,17 @@ self.addEventListener('fetch', function (e) {
   if (req.method !== 'GET') return;
   var url = new URL(req.url);
   if (url.origin !== self.location.origin) return; // never proxy cross-origin API calls
+  // Network-first: always try the live site so CSS/JS updates appear immediately.
+  // Fall back to cache when offline so the installed app still works.
   e.respondWith(
-    caches.match(req).then(function (hit) {
-      return hit || fetch(req).then(function (res) {
-        var copy = res.clone();
-        caches.open(CACHE).then(function (c) { c.put(req, copy); });
-        return res;
-      }).catch(function () { return caches.match('./index.html'); });
+    fetch(req).then(function (res) {
+      var copy = res.clone();
+      caches.open(CACHE).then(function (c) { c.put(req, copy); });
+      return res;
+    }).catch(function () {
+      return caches.match(req).then(function (hit) {
+        return hit || (req.mode === 'navigate' ? caches.match('./index.html') : null);
+      });
     })
   );
 });
