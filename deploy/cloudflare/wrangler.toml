@@ -1,0 +1,13 @@
+name = "avplay-web"
+main = "worker.js"
+compatibility_date = "2024-10-01"
+
+# 静态资源：播放器页与 hls.js（无需 Worker 代码即可提供）
+[assets]
+directory = "./assets"
+binding = "ASSETS"
+
+# 可选：把服务跑在自定义域名上
+# routes = [
+#   { pattern = "avplay.example.com/*", zone_name = "example.com" }
+# ]

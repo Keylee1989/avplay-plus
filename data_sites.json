@@ -1,0 +1,696 @@
+[
+  {
+    "id": "missav",
+    "name": "MissAV",
+    "host": "missav.ws",
+    "group": "play",
+    "url": "https://missav.ws/search/{q}"
+  },
+  {
+    "id": "javmenu",
+    "name": "JavMenu",
+    "host": "javmenu.com",
+    "group": "play",
+    "url": "https://javmenu.com/zh/search?wd={q}"
+  },
+  {
+    "id": "xchina",
+    "name": "XChina",
+    "host": "en.xchina.co",
+    "group": "play",
+    "url": "https://en.xchina.co/search?q={q}"
+  },
+  {
+    "id": "missav123",
+    "name": "MissAV123",
+    "host": "missav123.com",
+    "group": "play",
+    "url": "https://missav123.com/search/{q}"
+  },
+  {
+    "id": "javbus",
+    "name": "JavBus",
+    "host": "www.javbus.com",
+    "group": "play",
+    "url": "https://www.javbus.com/search/{q}"
+  },
+  {
+    "id": "javdb",
+    "name": "JavDB",
+    "host": "javdb.com",
+    "group": "lib",
+    "url": "https://javdb.com/search?q={q}&f=all"
+  },
+  {
+    "id": "jav321",
+    "name": "Jav321",
+    "host": "www.jav321.com",
+    "group": "lib",
+    "url": "https://www.google.com/search?q=site%3Ajav321.com+{q}"
+  },
+  {
+    "id": "avmoo",
+    "name": "AvMoo",
+    "host": "avmoo.com",
+    "group": "lib",
+    "url": "https://www.google.com/search?q=site%3Aavmoo.com+{q}"
+  },
+  {
+    "id": "javlibrary",
+    "name": "JavLibrary",
+    "host": "www.javlibrary.com",
+    "group": "lib",
+    "url": "https://www.javlibrary.com/cn/vl_searchbyid.php?keyword={q}"
+  },
+  {
+    "id": "r18",
+    "name": "R18.dev",
+    "host": "r18.dev",
+    "group": "lib",
+    "url": "https://r18.dev/search?q={q}"
+  },
+  {
+    "id": "javdatabase",
+    "name": "JavDatabase",
+    "host": "www.javdatabase.com",
+    "group": "lib",
+    "url": "https://www.javdatabase.com/search/?q={q}"
+  },
+  {
+    "id": "av01",
+    "name": "AV01",
+    "host": "www.av01.tv",
+    "group": "play",
+    "url": "https://www.av01.tv/search?q={q}"
+  },
+  {
+    "id": "avple",
+    "name": "AVPLE",
+    "host": "avple.tv",
+    "group": "play",
+    "url": "https://avple.tv/search?q={q}"
+  },
+  {
+    "id": "njav",
+    "name": "NJAV",
+    "host": "njav.tv",
+    "group": "play",
+    "url": "https://njav.tv/search?q={q}"
+  },
+  {
+    "id": "javguru",
+    "name": "JAVGuru",
+    "host": "jav.guru",
+    "group": "play",
+    "url": "https://jav.guru/?s={q}"
+  },
+  {
+    "id": "javhd",
+    "name": "JAVHD",
+    "host": "javhd.today",
+    "group": "play",
+    "url": "https://javhd.today/?s={q}"
+  },
+  {
+    "id": "getav",
+    "name": "GetAV",
+    "host": "getav.net",
+    "group": "play",
+    "url": "https://getav.net/zh/search?q={q}"
+  },
+  {
+    "id": "perverzija",
+    "name": "Perverzija",
+    "host": "tube.perverzija.com",
+    "group": "play",
+    "url": "https://tube.perverzija.com/?s={q}"
+  },
+  {
+    "id": "javdoe",
+    "name": "JavDoe",
+    "host": "javdoe.com",
+    "group": "play",
+    "url": "https://javdoe.com/?s={q}"
+  },
+  {
+    "id": "javcl",
+    "name": "JavCl",
+    "host": "javcl.com",
+    "group": "play",
+    "url": "https://javcl.com/search?q={q}"
+  },
+  {
+    "id": "supjav",
+    "name": "SupJav",
+    "host": "supjav.com",
+    "group": "play",
+    "url": "https://supjav.com/?s={q}"
+  },
+  {
+    "id": "supjavblog",
+    "name": "SupJav Blog",
+    "host": "supjav.blog",
+    "group": "play",
+    "url": "https://supjav.blog/search?keyword={q}"
+  },
+  {
+    "id": "javmix",
+    "name": "JavMix",
+    "host": "javmix.tv",
+    "group": "play",
+    "url": "https://javmix.tv/search?q={q}"
+  },
+  {
+    "id": "javgg",
+    "name": "JavGG",
+    "host": "javgg.net",
+    "group": "play",
+    "url": "https://javgg.net/?s={q}"
+  },
+  {
+    "id": "javfree",
+    "name": "JavFree",
+    "host": "javfree.me",
+    "group": "play",
+    "url": "https://javfree.me/?s={q}"
+  },
+  {
+    "id": "7mmtv",
+    "name": "7MMTV",
+    "host": "7mmtv.tv",
+    "group": "play",
+    "url": "https://7mmtv.tv/search/{q}"
+  },
+  {
+    "id": "kissjav",
+    "name": "KissJAV",
+    "host": "kissjav.com",
+    "group": "play",
+    "url": "https://kissjav.com/search?q={q}"
+  },
+  {
+    "id": "18av",
+    "name": "18AV",
+    "host": "18av.com",
+    "group": "play",
+    "url": "https://www.google.com/search?q=site%3A18av.mm-cg.com+{q}"
+  },
+  {
+    "id": "hjd2048",
+    "name": "2048 论坛",
+    "host": "hjd2048.com",
+    "group": "magnet",
+    "url": "https://hjd2048.com/2048/search.php?keyword={q}"
+  },
+  {
+    "id": "sehuatang",
+    "name": "色花堂",
+    "host": "www.sehuatang.net",
+    "group": "magnet",
+    "url": "https://www.sehuatang.net/search.php?mod=forum&srchtxt={q}"
+  },
+  {
+    "id": "pornhub",
+    "name": "Pornhub",
+    "host": "www.pornhub.com",
+    "group": "play",
+    "url": "https://www.pornhub.com/video/search?search={q}"
+  },
+  {
+    "id": "xvideos",
+    "name": "XVideos",
+    "host": "www.xvideos.com",
+    "group": "play",
+    "url": "https://www.xvideos.com/?k={q}"
+  },
+  {
+    "id": "xhamster",
+    "name": "xHamster",
+    "host": "xhamster.com",
+    "group": "play",
+    "url": "https://xhamster.com/search/{q}"
+  },
+  {
+    "id": "spankbang",
+    "name": "SpankBang",
+    "host": "spankbang.com",
+    "group": "play",
+    "url": "https://spankbang.com/s/{q}/"
+  },
+  {
+    "id": "javsub",
+    "name": "JavSub.ai（字幕）",
+    "host": "javsub.ai",
+    "group": "sub",
+    "url": "https://javsub.ai/search?q={q}"
+  },
+  {
+    "id": "javhihi",
+    "name": "JavHihi",
+    "host": "javhihi.com",
+    "group": "play",
+    "url": "https://www.javhihi.com/search/{q}"
+  },
+  {
+    "id": "javme",
+    "name": "JavMe",
+    "host": "javme.com",
+    "group": "play",
+    "url": "https://javme.com/search?q={q}"
+  },
+  {
+    "id": "avbebe",
+    "name": "AvBebe",
+    "host": "avbebe.com",
+    "group": "play",
+    "url": "https://avbebe.com/?s={q}"
+  },
+  {
+    "id": "pornhat",
+    "name": "PornHat",
+    "host": "pornhat.com",
+    "group": "play",
+    "url": "https://pornhat.com/search/{q}/"
+  },
+  {
+    "id": "javdock",
+    "name": "JavDock",
+    "host": "javdock.com",
+    "group": "play",
+    "url": "https://javdock.com/?s={q}"
+  },
+  {
+    "id": "javtrailers",
+    "name": "JavTrailers",
+    "host": "javtrailers.com",
+    "group": "lib",
+    "url": "https://www.javtrailers.com/search/?q={q}"
+  },
+  {
+    "id": "javwiki",
+    "name": "JavWiki",
+    "host": "javwiki.net",
+    "group": "lib",
+    "url": "https://javwiki.net/search?q={q}"
+  },
+  {
+    "id": "subhd",
+    "name": "SubHD（字幕）",
+    "host": "subhd.tv",
+    "group": "sub",
+    "url": "https://subhd.tv/search/{q}"
+  },
+  {
+    "id": "assrt",
+    "name": "Assrt 字幕库",
+    "host": "assrt.net",
+    "group": "sub",
+    "url": "https://assrt.net/sub/?searchword={q}"
+  },
+  {
+    "id": "zimuxia",
+    "name": "字幕侠",
+    "host": "zimuxia.net",
+    "group": "sub",
+    "url": "https://zimuxia.net/search?q={q}"
+  },
+  {
+    "id": "subtitlecat",
+    "name": "SubtitleCat",
+    "host": "subtitlecat.com",
+    "group": "sub",
+    "url": "https://www.subtitlecat.com/index.php?search={q}"
+  },
+  {
+    "id": "subdl",
+    "name": "SubDL",
+    "host": "subdl.com",
+    "group": "sub",
+    "url": "https://subdl.com/search/{q}"
+  },
+  {
+    "id": "jable",
+    "name": "Jable",
+    "host": "jable.tv",
+    "group": "play",
+    "url": "https://jable.tv/search/{q}/"
+  },
+  {
+    "id": "memojav",
+    "name": "MemoJav",
+    "host": "memojav.com",
+    "group": "play",
+    "url": "https://memojav.com/search?q={q}"
+  },
+  {
+    "id": "missavai",
+    "name": "MissAV.ai",
+    "host": "missav.ai",
+    "group": "play",
+    "url": "https://missav.ai/search/{q}"
+  },
+  {
+    "id": "thisav",
+    "name": "ThisAV",
+    "host": "thisav.com",
+    "group": "play",
+    "url": "https://thisav.com/search/{q}"
+  },
+  {
+    "id": "xnxx",
+    "name": "XNXX",
+    "host": "www.xnxx.com",
+    "group": "play",
+    "url": "https://www.xnxx.com/search/{q}"
+  },
+  {
+    "id": "eporner",
+    "name": "Eporner",
+    "host": "www.eporner.com",
+    "group": "play",
+    "url": "https://www.eporner.com/search/{q}/"
+  },
+  {
+    "id": "redtube",
+    "name": "RedTube",
+    "host": "www.redtube.com",
+    "group": "play",
+    "url": "https://www.redtube.com/?search={q}"
+  },
+  {
+    "id": "youporn",
+    "name": "YouPorn",
+    "host": "www.youporn.com",
+    "group": "play",
+    "url": "https://www.youporn.com/search/?query={q}"
+  },
+  {
+    "id": "avgle",
+    "name": "Avgle",
+    "host": "avgle.com",
+    "group": "play",
+    "url": "https://avgle.com/search/videos?search_query={q}"
+  },
+  {
+    "id": "bestjavporn",
+    "name": "BestJavPorn",
+    "host": "www.bestjavporn.com",
+    "group": "play",
+    "url": "https://www.bestjavporn.com/search/{q}/"
+  },
+  {
+    "id": "netflav",
+    "name": "Netflav",
+    "host": "netflav.com",
+    "group": "play",
+    "url": "https://netflav.com/search?type=title&keyword={q}"
+  },
+  {
+    "id": "huangguo",
+    "name": "黄果短剧",
+    "host": "huangguoai.com",
+    "group": "play",
+    "url": "https://huangguoai.com/search?keyword={q}"
+  },
+  {
+    "id": "huangguodrama",
+    "name": "黄果短剧（繁体）",
+    "host": "huangguodrama.ai",
+    "group": "play",
+    "url": "https://huangguodrama.ai/search?keyword={q}"
+  },
+  {
+    "id": "aishuangju",
+    "name": "AI爽剧网",
+    "host": "aishuangju.com",
+    "group": "play",
+    "url": "https://aishuangju.com/search?q={q}"
+  },
+  {
+    "id": "huangguotv",
+    "name": "黄果视频",
+    "host": "huangguo.tv",
+    "group": "play",
+    "url": "https://huangguo.tv/search?keyword={q}"
+  },
+  {
+    "id": "chengguo",
+    "name": "橙果短剧",
+    "host": "chengguodj.com",
+    "group": "play",
+    "url": "https://chengguodj.com/search?keyword={q}"
+  },
+  {
+    "id": "crdjai91",
+    "name": "91成人短剧",
+    "host": "91crdjai.com",
+    "group": "play",
+    "url": "https://91crdjai.com/search?keyword={q}"
+  },
+  {
+    "id": "huangdou",
+    "name": "黄豆短剧（首集免费）",
+    "host": "huangdoumj.com",
+    "group": "play",
+    "url": "https://huangdoumj.com/search/?keyword={q}"
+  },
+  {
+    "id": "haijiaolove",
+    "name": "海角情",
+    "host": "haijiaolove.xyz",
+    "group": "play",
+    "url": "https://www.haijiaolove.xyz/?s={q}"
+  },
+  {
+    "id": "hjw01",
+    "name": "海角网",
+    "host": "hjw01.com",
+    "group": "play",
+    "url": "https://www.hjw01.com/search/{q}/"
+  },
+  {
+    "id": "haijiaowang",
+    "name": "海角网（永久地址）",
+    "host": "haijiaowang.com",
+    "group": "play",
+    "url": "https://haijiaowang.com/search/{q}/"
+  },
+  {
+    "id": "hjwline1",
+    "name": "海角网（线路一）",
+    "host": "arm.ujjejxar.cc",
+    "group": "play",
+    "url": "https://arm.ujjejxar.cc/search/{q}/"
+  },
+  {
+    "id": "myzys",
+    "name": "梦影资源社",
+    "host": "myzys.cc",
+    "group": "play",
+    "url": "https://myzys.cc/?s={q}"
+  },
+  {
+    "id": "aihuangdou",
+    "name": "黄桃短剧",
+    "host": "aihuangdou.com",
+    "group": "play",
+    "url": "https://aihuangdou.com/search/?q={q}"
+  },
+  {
+    "id": "haijiaoshequ",
+    "name": "海角社区（部分免费）",
+    "host": "haijiaoshequ.pro",
+    "group": "play",
+    "url": "https://haijiaoshequ.pro/search?q={q}"
+  },
+  {
+    "id": "aigo",
+    "name": "爱果短剧",
+    "host": "aigo.me",
+    "group": "play",
+    "url": "https://aigo.me/search?q={q}"
+  },
+  {
+    "id": "ltxlib",
+    "name": "LTX 4K（站内）",
+    "host": "ltxlib.dpdns.org",
+    "group": "play",
+    "url": "https://ltxlib.dpdns.org/"
+  },
+  {
+    "id": "javfilms",
+    "name": "JAV Films（字幕）",
+    "host": "javfilms.com",
+    "group": "sub",
+    "url": "https://javfilms.com/?s={q}"
+  },
+  {
+    "id": "javsubtitled",
+    "name": "JAV Subtitled（字幕）",
+    "host": "javsubtitled.com",
+    "group": "sub",
+    "url": "https://javsubtitled.com/?s={q}"
+  },
+  {
+    "id": "javsubs",
+    "name": "JavSubs 字幕库",
+    "host": "javsubs.com",
+    "group": "sub",
+    "url": "https://www.google.com/search?q=site%3Ajavsubs.com+{q}"
+  },
+  {
+    "id": "opensubtitles",
+    "name": "OpenSubtitles",
+    "host": "www.opensubtitles.com",
+    "group": "sub",
+    "url": "https://www.opensubtitles.com/en/search?q={q}"
+  },
+  {
+    "id": "subsource",
+    "name": "SubSource",
+    "host": "subsource.net",
+    "group": "sub",
+    "url": "https://subsource.net/search?query={q}"
+  },
+  {
+    "id": "podnapisi",
+    "name": "Podnapisi",
+    "host": "www.podnapisi.net",
+    "group": "sub",
+    "url": "https://www.podnapisi.net/subtitles/search/?keywords={q}"
+  },
+  {
+    "id": "subf2m",
+    "name": "Subf2m",
+    "host": "subf2m.co",
+    "group": "sub",
+    "url": "https://subf2m.co/subtitles/searchbytitle?query={q}"
+  },
+  {
+    "id": "a4k",
+    "name": "A4k 字幕网",
+    "host": "www.a4k.net",
+    "group": "sub",
+    "url": "https://www.a4k.net/search?keyword={q}"
+  },
+  {
+    "id": "zimuku",
+    "name": "字幕库 (Zimuku)",
+    "host": "zimuku.org",
+    "group": "sub",
+    "url": "https://zimuku.org/search?q={q}"
+  },
+  {
+    "id": "fanza",
+    "name": "FANZA / DMM",
+    "host": "www.dmm.co.jp",
+    "group": "lib",
+    "url": "https://www.dmm.co.jp/search/=/searchstr/{q}/"
+  },
+  {
+    "id": "sukebei",
+    "name": "Sukebei",
+    "host": "sukebei.nyaa.si",
+    "group": "magnet",
+    "url": "https://sukebei.nyaa.si/?q={q}"
+  },
+  {
+    "id": "javmost",
+    "name": "JAVMost",
+    "host": "javmost.ws",
+    "group": "play",
+    "url": "https://javmost.ws/search/{q}"
+  },
+  {
+    "id": "ikisoda",
+    "name": "Ikisoda",
+    "host": "ikisoda.com",
+    "group": "play",
+    "url": "https://ikisoda.com/search/{q}"
+  },
+  {
+    "id": "javmit",
+    "name": "JAVMIT",
+    "host": "javmit.com",
+    "group": "play",
+    "url": "https://javmit.com/zh-TW/?s={q}"
+  },
+  {
+    "id": "javtiful",
+    "name": "Javtiful",
+    "host": "javtiful.com",
+    "group": "play",
+    "url": "https://javtiful.com/zh/search?q={q}"
+  },
+  {
+    "id": "jav777",
+    "name": "JAV777",
+    "host": "www.jav777.xyz",
+    "group": "play",
+    "url": "https://www.jav777.xyz/?s={q}"
+  },
+  {
+    "id": "av2026",
+    "name": "2026AV",
+    "host": "2026av.com",
+    "group": "play",
+    "url": "https://2026av.com/search.php?wd={q}"
+  },
+  {
+    "id": "xiaojizy",
+    "name": "小鸡资源",
+    "host": "www.xiaojizy.live",
+    "group": "play",
+    "url": "https://www.xiaojizy.live/search?wd={q}"
+  },
+  {
+    "id": "cast",
+    "name": "黑料不打烊",
+    "host": "cast.tvafkgsu.cc",
+    "group": "play",
+    "url": "https://cast.tvafkgsu.cc/search/{q}/"
+  },
+  {
+    "id": "mrds",
+    "name": "每日大赛",
+    "host": "mrds.com",
+    "group": "play",
+    "url": "https://mrds.com/search/{q}/"
+  },
+  {
+    "id": "ai2048",
+    "name": "麻豆AI",
+    "host": "2048ai.vip",
+    "group": "play",
+    "url": "https://2048ai.vip/search?q={q}"
+  },
+  {
+    "id": "javd",
+    "name": "JAVD",
+    "host": "cn.javd.me",
+    "group": "lib",
+    "url": "https://cn.javd.me/search?q={q}"
+  },
+  {
+    "id": "atlas",
+    "name": "Atlas",
+    "host": "atlas.wort.uk",
+    "group": "lib",
+    "url": "https://atlas.wort.uk/search?q={q}"
+  },
+  {
+    "id": "avdanyuwiki",
+    "name": "男优维基",
+    "host": "avdanyuwiki.com",
+    "group": "lib",
+    "url": "https://avdanyuwiki.com/?s={q}"
+  },
+  {
+    "id": "avwiki",
+    "name": "女优维基",
+    "host": "seesaawiki.jp",
+    "group": "lib",
+    "url": "https://seesaawiki.jp/av_video/search?search_type=2&search_target=all&keywords={q}",
+    "enc": "eucjp"
+  }
+]

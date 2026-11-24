@@ -1,0 +1,18 @@
+{
+  "appId": "com.avplay.plus",
+  "appName": "AvPlay+",
+  "webDir": ".",
+  "bundledWebRuntime": false,
+  "loggingBehavior": "none",
+  "ios": {
+    "contentInset": "always",
+    "allowsInlineMediaPlayback": true,
+    "mediaPlaybackRequiresUserAction": false,
+    "backgroundColor": "#0b0d12",
+    "scheme": "AVPLAY_PLUS_SCHEME"
+  },
+  "plugins": {
+    "SplashScreen": { "launchShowDuration": 0, "launchAutoHide": true, "backgroundColor": "#0b0d12" }
+  },
+  "server": { "androidScheme": "https" }
+}

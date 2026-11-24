@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AvPlay Web · HLS 播放器</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1e222b;
+    --border: #2a2f3a;
+    --text: #e6e8ec;
+    --muted: #8b93a1;
+    --accent: #4f8cff;
+    --accent-2: #2f6ae0;
+    --danger: #e5534b;
+    --ok: #3fb27f;
+    --radius: 10px;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 14px/1.5 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--panel);
+  }
+  header h1 { font-size: 16px; margin: 0; font-weight: 600; letter-spacing: .3px; }
+  header .sub { color: var(--muted); font-size: 12px; }
+  main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 380px 1fr;
+    gap: 16px;
+    padding: 16px 20px;
+    align-items: start;
+  }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+  }
+  .card h2 { font-size: 13px; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; }
+  .tabs { display: flex; gap: 6px; margin-bottom: 14px; }
+  .tab {
+    flex: 1;
+    text-align: center;
+    padding: 8px;
+    border-radius: 8px;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    cursor: pointer;
+    user-select: none;
+  }
+  .tab.active { color: var(--text); border-color: var(--accent); background: rgba(79,140,255,.12); }
+  label { display: block; font-size: 12px; color: var(--muted); margin: 10px 0 4px; }
+  input, select, textarea {
+    width: 100%;
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 8px;
+    padding: 9px 10px;
+    font: inherit;
+    outline: none;
+  }
+  input:focus, select:focus, textarea:focus { border-color: var(--accent); }
+  textarea { resize: vertical; min-height: 62px; font-family: Consolas, "Courier New", monospace; font-size: 12px; }
+  .row { display: flex; gap: 10px; }
+  .row > * { flex: 1; }
+  button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 11px;
+    border: 0;
+    border-radius: 8px;
+    background: var(--accent);
+    color: #fff;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover { background: var(--accent-2); }
+  button:disabled { opacity: .55; cursor: default; }
+  .stage {
+    background: #000;
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  video { width: 100%; height: 100%; display: block; background: #000; }
+  .bar { display: flex; align-items: center; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
+  .bar select { width: auto; min-width: 160px; }
+  .pill {
+    font-size: 12px;
+    color: var(--muted);
+    background: var(--panel-2);
+    border: 1px solid var(--border);
+    padding: 5px 10px;
+    border-radius: 999px;
+  }
+  .pill.ok { color: var(--ok); border-color: rgba(63,178,127,.4); }
+  .pill.err { color: var(--danger); border-color: rgba(229,83,75,.4); }
+  .log {
+    margin-top: 14px;
+    background: #0b0d11;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px;
+    height: 180px;
+    overflow: auto;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 12px;
+    white-space: pre-wrap;
+    word-break: break-all;
+    color: #b7c0cc;
+  }
+  .log .t { color: var(--muted); }
+  .log .e { color: var(--danger); }
+  .log .s { color: var(--ok); }
+  .hidden { display: none !important; }
+  .hint { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  code { background: var(--panel-2); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+</style>
+</head>
+<body>
+<header>
+  <h1>AvPlay Web</h1>
+  <span class="sub">HLS 网页播放 · 对应 AvPlay 2.2.0 的 DesktopPlaybackGatewaySession</span>
+</header>
+
+<main>
+  <section class="card">
+    <div class="tabs">
+      <div class="tab active" id="tab-direct">直接地址</div>
+      <div class="tab" id="tab-api">API 解析</div>
+    </div>
+
+    <div id="pane-direct">
+      <label>M3U8 / 视频地址</label>
+      <input id="url" placeholder="https://.../index.m3u8" spellcheck="false">
+      <label>请求头（JSON，可选）</label>
+      <textarea id="headers" spellcheck="false" placeholder='{"Referer":"https://...","User-Agent":"..."}'></textarea>
+      <label>最高清晰度（可选，用于过滤主清单）</label>
+      <select id="maxheight">
+        <option value="">自动 / 不过滤</option>
+        <option value="2160">2160p 及以下</option>
+        <option value="1080">1080p 及以下</option>
+        <option value="720">720p 及以下</option>
+        <option value="480">480p 及以下</option>
+      </select>
+    </div>
+
+    <div id="pane-api" class="hidden">
+      <label>接口 Base URL（huangguo 风格）</label>
+      <input id="api-base" placeholder="https://example-site.com" spellcheck="false">
+      <div class="row">
+        <div>
+          <label>视频 ID</label>
+          <input id="api-id" placeholder="123456" spellcheck="false">
+        </div>
+        <div>
+          <label>分集 episode</label>
+          <input id="api-episode" value="1" spellcheck="false">
+        </div>
+      </div>
+      <label>最高清晰度（可选）</label>
+      <select id="api-maxheight">
+        <option value="">自动 / 不过滤</option>
+        <option value="2160">2160p 及以下</option>
+        <option value="1080">1080p 及以下</option>
+        <option value="720">720p 及以下</option>
+        <option value="480">480p 及以下</option>
+      </select>
+      <p class="hint">对应桌面端 <code>HuangGuoService.getPlayback()</code>：<code>GET {base}/api/videos/{id}/play?episode=n</code>，取响应里的 <code>data.video_url</code>。</p>
+    </div>
+
+    <label>网关地址</label>
+    <input id="gateway" spellcheck="false">
+    <button id="play">播放</button>
+    <p class="hint">本页面由 <code>gateway_server.py</code> 提供；若直接双击打开，网关默认 <code>http://127.0.0.1:8765</code>。</p>
+  </section>
+
+  <section>
+    <div class="stage" id="stage">
+      <video id="video" controls playsinline></video>
+    </div>
+    <div class="bar">
+      <select id="quality"><option value="-1">自动（跟随清单）</option></select>
+      <span class="pill" id="pill-status">空闲</span>
+      <span class="pill" id="pill-src"></span>
+    </div>
+    <div class="log" id="log"></div>
+  </section>
+</main>
+
+<script src="hls.min.js"></script>
+<script>
+(function () {
+  "use strict";
+
+  var DEFAULT_GATEWAY = location.protocol === "file:" ? "http://127.0.0.1:8765" : location.origin;
+  var gateway = document.getElementById("gateway");
+  gateway.value = DEFAULT_GATEWAY.replace(/\/$/, "");
+
+  var video = document.getElementById("video");
+  var logEl = document.getElementById("log");
+  var statusEl = document.getElementById("pill-status");
+  var srcEl = document.getElementById("pill-src");
+  var qualityEl = document.getElementById("quality");
+  var hls = null;
+  var currentSession = null;
+
+  function log(msg, cls) {
+    var t = new Date().toLocaleTimeString();
+    var line = document.createElement("div");
+    if (cls) line.className = cls;
+    line.innerHTML = '<span class="t">[' + t + ']</span> ' + escapeHtml(msg);
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+  }
+  function escapeHtml(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+  function setStatus(text, cls) {
+    statusEl.textContent = text;
+    statusEl.className = "pill" + (cls ? " " + cls : "");
+  }
+
+  // 选项卡
+  var tabDirect = document.getElementById("tab-direct");
+  var tabApi = document.getElementById("tab-api");
+  var paneDirect = document.getElementById("pane-direct");
+  var paneApi = document.getElementById("pane-api");
+  tabDirect.onclick = function () {
+    tabDirect.classList.add("active"); tabApi.classList.remove("active");
+    paneDirect.classList.remove("hidden"); paneApi.classList.add("hidden");
+  };
+  tabApi.onclick = function () {
+    tabApi.classList.add("active"); tabDirect.classList.remove("active");
+    paneApi.classList.remove("hidden"); paneDirect.classList.add("hidden");
+  };
+
+  function destroyHls() {
+    if (hls) { try { hls.destroy(); } catch (e) {} hls = null; }
+    video.removeAttribute("src");
+    video.load();
+  }
+
+  function fillQuality(renditions) {
+    qualityEl.innerHTML = '<option value="-1">自动（跟随清单）</option>';
+    renditions.forEach(function (r) {
+      var label = (r.height ? r.height + "p" : "变体 " + r.id);
+      if (r.width && r.height) label = r.height + "p (" + r.width + "x" + r.height + ")";
+      if (r.bandwidth) label += " · " + Math.round(r.bandwidth / 1000) + " kbps";
+      var opt = document.createElement("option");
+      opt.value = String(r.level);
+      opt.textContent = label;
+      qualityEl.appendChild(opt);
+    });
+  }
+
+  function startHls(playUrl, renditions) {
+    destroyHls();
+    if (!window.Hls) {
+      log("hls.min.js 未加载，请确认它和本页面放在同一目录。", "e");
+      setStatus("缺少 hls.js", "err");
+      return;
+    }
+    if (window.Hls.isSupported()) {
+      hls = new window.Hls({ debug: false, enableWorker: true });
+      hls.loadSource(playUrl);
+      hls.attachMedia(video);
+      hls.on(window.Hls.Events.MANIFEST_PARSED, function (e, data) {
+        log("清单解析完成，共 " + data.levels.length + " 个清晰度", "s");
+        video.play().catch(function () {});
+      });
+      hls.on(window.Hls.Events.LEVEL_SWITCHED, function (e, data) {
+        var lvl = hls.levels[data.level];
+        if (lvl) log("当前清晰度: " + (lvl.height ? lvl.height + "p" : "?") +
+                     " (" + Math.round((lvl.bitrate || 0) / 1000) + " kbps)");
+      });
+      hls.on(window.Hls.Events.ERROR, function (e, data) {
+        log("HLS 错误: " + data.type + " / " + data.details + (data.response ? " (" + data.response.code + ")" : ""), "e");
+        setStatus("播放出错", "err");
+      });
+    } else if (video.canPlayType("application/vnd.apple.mpegurl")) {
+      // Safari / iOS 原生 HLS
+      video.src = playUrl;
+      video.addEventListener("loadedmetadata", function () { video.play(); }, { once: true });
+    } else {
+      log("当前浏览器不支持 HLS（MSE），请使用 Chrome/Edge/Firefox。", "e");
+      setStatus("不支持 HLS", "err");
+    }
+  }
+
+  function startFile(url) {
+    destroyHls();
+    video.src = url;
+    video.play().catch(function () {});
+  }
+
+  document.getElementById("play").onclick = function () {
+    var gw = gateway.value.replace(/\/$/, "");
+    if (!gw) { log("请填写网关地址", "e"); return; }
+    setStatus("解析中…");
+    log("开始解析…");
+
+    if (!paneDirect.classList.contains("hidden")) {
+      var url = document.getElementById("url").value.trim();
+      if (!url) { log("请填写播放地址", "e"); setStatus("缺少地址", "err"); return; }
+      var headersRaw = document.getElementById("headers").value.trim();
+      var headers = {};
+      if (headersRaw) {
+        try { headers = JSON.parse(headersRaw); }
+        catch (e) { log("请求头不是合法 JSON: " + e.message, "e"); setStatus("请求头格式错误", "err"); return; }
+      }
+      var maxheight = document.getElementById("maxheight").value;
+      var params = new URLSearchParams({ url: url, headers: JSON.stringify(headers), maxheight: maxheight });
+      fetch(gw + "/api/play?" + params.toString())
+        .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+        .then(function (res) {
+          if (!res.ok) throw new Error(res.j.error || ("HTTP " + res.ok));
+          currentSession = res.j.session;
+          log("会话 " + res.j.session + " 已创建", "s");
+          log("上游地址: " + res.j.upstream_url);
+          fillQuality(res.j.renditions || []);
+          srcEl.textContent = res.j.kind === "hls" ? "HLS" : "直连文件";
+          setStatus("播放中", "ok");
+          if (res.j.kind === "hls") startHls(res.j.play_url, res.j.renditions || []);
+          else startFile(res.j.play_url);
+        })
+        .catch(function (e) { log("解析失败: " + e.message, "e"); setStatus("失败", "err"); });
+      return;
+    }
+
+    var base = document.getElementById("api-base").value.trim();
+    var id = document.getElementById("api-id").value.trim();
+    var episode = document.getElementById("api-episode").value.trim() || "1";
+    var apiMax = document.getElementById("api-maxheight").value;
+    if (!base || !id) { log("请填写 Base URL 和视频 ID", "e"); setStatus("缺少参数", "err"); return; }
+    var params = new URLSearchParams({ source: "huangguo", base: base, id: id, episode: episode, maxheight: apiMax });
+    fetch(gw + "/api/resolve?" + params.toString())
+      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
+      .then(function (res) {
+        if (!res.ok) throw new Error(res.j.error || "resolve failed");
+        currentSession = res.j.session;
+        log("解析成功: " + (res.j.resolved_from.title || ""), "s");
+        log("video_url: " + res.j.upstream_url);
+        fillQuality(res.j.renditions || []);
+        srcEl.textContent = res.j.kind === "hls" ? "HLS" : "直连文件";
+        setStatus("播放中", "ok");
+        if (res.j.kind === "hls") startHls(res.j.play_url, res.j.renditions || []);
+        else startFile(res.j.play_url);
+      })
+      .catch(function (e) { log("解析失败: " + e.message, "e"); setStatus("失败", "err"); });
+  };
+
+  qualityEl.onchange = function () {
+    if (!hls) return;
+    var v = parseInt(qualityEl.value, 10);
+    hls.currentLevel = v;   // -1 = 自动
+    log(v === -1 ? "已切回自动清晰度" : "已切换到清单第 " + v + " 档");
+  };
+
+  log("就绪。网关: " + gateway.value);
+})();
+</script>
+</body>
+</html>

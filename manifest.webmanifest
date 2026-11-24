@@ -1,0 +1,19 @@
+{
+  "name": "AvPlay+ 聚合字幕播放器",
+  "short_name": "AvPlay+",
+  "description": "聚合搜索 · 32 源字幕 · LTX 离线片库 · 多线路播放",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0b0d12",
+  "theme_color": "#0b0d12",
+  "lang": "zh-CN",
+  "icons": [
+    { "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "字幕搜索", "url": "./index.html?tab=sub" },
+    { "name": "LTX 片库", "url": "./index.html?tab=ltx" }
+  ]
+}

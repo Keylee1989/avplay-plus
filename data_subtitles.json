@@ -1,0 +1,226 @@
+[
+  {
+    "id": "avsubtitles",
+    "name": "AVSubtitles",
+    "url": "https://www.avsubtitles.com",
+    "searchUrl": "https://www.avsubtitles.com/search_results.php?search={id}",
+    "note": "JAV 专用 · 免费社群字幕库，支持站内直连下载"
+  },
+  {
+    "id": "javsub",
+    "name": "JavSub.ai",
+    "url": "https://javsub.ai",
+    "searchUrl": "https://javsub.ai/search?q={id}",
+    "note": "JAV 专用 · AI 生成中文字幕，收录较全"
+  },
+  {
+    "id": "subtitlecat",
+    "name": "SubtitleCat",
+    "url": "https://www.subtitlecat.com",
+    "searchUrl": "https://www.subtitlecat.com/index.php?search={id}",
+    "note": "JAV/影视通吃 · 17 亿条多语言字幕，番号直接命中"
+  },
+  {
+    "id": "javsubtitled",
+    "name": "JAV Subtitled",
+    "url": "https://javsubtitled.com",
+    "searchUrl": "https://javsubtitled.com/?s={id}",
+    "note": "JAV 专用 · 精选中文字幕，按番号站内搜索"
+  },
+  {
+    "id": "javfilms",
+    "name": "JAV Films",
+    "url": "https://javfilms.com",
+    "searchUrl": "https://javfilms.com/?s={id}",
+    "note": "JAV 专用 · 番号字幕检索，更新频繁"
+  },
+  {
+    "id": "qucihe",
+    "name": "曲词和",
+    "url": "https://www.qucihe.com",
+    "searchUrl": "https://www.qucihe.com/?s={id}",
+    "note": "JAV 专用 · 番号中文 SRT 直链下载（日剧字幕分类）"
+  },
+  {
+    "id": "subtitletrans",
+    "name": "SubtitleTrans AV 库",
+    "url": "https://subtitletrans.com/database/tag/AV",
+    "searchUrl": "https://subtitletrans.com/database?search={id}",
+    "note": "JAV 专用 · 按厂牌标签收录 AV 字幕，多为 4K 新片"
+  },
+  {
+    "id": "myjavbay",
+    "name": "My JAV Bay",
+    "url": "https://myjavbay.com/index.php/subtitles",
+    "searchUrl": "https://www.google.com/search?q=site%3Amyjavbay.com+{id}",
+    "note": "JAV 专用 · 多语字幕（英/中/韩），走谷歌站内检索"
+  },
+  {
+    "id": "assrt",
+    "name": "伪射手网 (ASSRT)",
+    "url": "https://assrt.net",
+    "searchUrl": "https://assrt.net/sub/?searchword={id}",
+    "note": "中文 · 43 万+ 字幕，射手网传承站"
+  },
+  {
+    "id": "r3sub",
+    "name": "R3 字幕网",
+    "url": "https://r3sub.com",
+    "searchUrl": "https://www.google.com/search?q=site%3Ar3sub.com+{id}",
+    "note": "中文 · 台湾官方字幕站，简繁/双语齐全（2026 实测可用，替代失效的字幕库域名）"
+  },
+  {
+    "id": "moviesubtitles",
+    "name": "Moviesubtitles",
+    "url": "https://www.moviesubtitles.org",
+    "searchUrl": "https://www.google.com/search?q=site%3Amoviesubtitles.org+{id}",
+    "note": "全球 · 老牌电影字幕站，多语 SRT（2026 实测可用，替代失效的 SRTKU）"
+  },
+  {
+    "id": "subhd",
+    "name": "SubHD",
+    "url": "https://subhd.tv",
+    "searchUrl": "https://subhd.tv/search/{id}",
+    "note": "中文 · 国内用户量最大，含官方中字版本"
+  },
+  {
+    "id": "a4k",
+    "name": "A4k 字幕网",
+    "url": "https://www.a4k.net",
+    "searchUrl": "https://www.a4k.net/search?keyword={id}",
+    "note": "中文 · 高清蓝光与精校字幕"
+  },
+  {
+    "id": "zimuzimu",
+    "name": "中文字幕网",
+    "url": "https://cn.zimuzimu.com",
+    "searchUrl": "https://cn.zimuzimu.com/?s={id}",
+    "note": "中文 · 简繁/双语字幕，支持演员名检索"
+  },
+  {
+    "id": "yifysub",
+    "name": "YIFY Subtitles",
+    "url": "https://yts-subs.com",
+    "searchUrl": "https://yts-subs.com/search?q={id}",
+    "note": "多语言 · 按影片/番号聚合上传字幕"
+  },
+  {
+    "id": "subdl",
+    "name": "SubDL",
+    "url": "https://subdl.com",
+    "searchUrl": "https://subdl.com/search/{id}",
+    "note": "全球 · 现代界面，60+ 语言，时间轴较准"
+  },
+  {
+    "id": "opensubtitles",
+    "name": "OpenSubtitles",
+    "url": "https://www.opensubtitles.com",
+    "searchUrl": "https://www.opensubtitles.com/en/search?q={id}",
+    "note": "全球 · 最大开源字幕库，全语言"
+  },
+  {
+    "id": "subsource",
+    "name": "SubSource",
+    "url": "https://subsource.net",
+    "searchUrl": "https://subsource.net/search?query={id}",
+    "note": "全球 · 新一代聚合搜索"
+  },
+  {
+    "id": "podnapisi",
+    "name": "Podnapisi",
+    "url": "https://www.podnapisi.net",
+    "searchUrl": "https://www.podnapisi.net/subtitles/search/?keywords={id}",
+    "note": "全球 · 欧洲老牌多语种站，支持预览"
+  },
+  {
+    "id": "subf2m",
+    "name": "Subf2m",
+    "url": "https://subf2m.co",
+    "searchUrl": "https://subf2m.co/subtitles/searchbytitle?query={id}",
+    "note": "全球 · 多语言 SRT，按标题检索"
+  },
+  {
+    "id": "addic7ed",
+    "name": "Addic7ed",
+    "url": "https://www.addic7ed.com",
+    "searchUrl": "https://www.addic7ed.com/search.php?search={id}&Submit=Search",
+    "note": "欧美剧 · 时间轴精准，日更"
+  },
+  {
+    "id": "tvsubtitles",
+    "name": "TVsubtitles",
+    "url": "https://www.tvsubtitles.net",
+    "searchUrl": "https://www.tvsubtitles.net/search.php?q={id}",
+    "note": "欧美剧 · 20 种语言，含中日韩"
+  },
+  {
+    "id": "kitsunekko",
+    "name": "Kitsunekko",
+    "url": "https://www.kitsunekko.net",
+    "searchUrl": "https://www.google.com/search?q=site%3Akitsunekko.net+{id}",
+    "note": "日语/动漫 · 无广告，走谷歌站内检索"
+  },
+  {
+    "id": "subs4free",
+    "name": "Subs4Free",
+    "url": "https://www.subs4free.info",
+    "searchUrl": "https://www.subs4free.info/?s={id}",
+    "note": "全球 · 电影与剧集，支持 IMDb 检索"
+  },
+  {
+    "id": "zimuku",
+    "name": "字幕库 (Zimuku)",
+    "url": "https://zimuku.org",
+    "searchUrl": "https://zimuku.org/search?q={id}",
+    "note": "中文 · 影视字幕老站，简体/繁体齐全"
+  },
+  {
+    "id": "subhd2",
+    "name": "SubHD 备用域",
+    "url": "https://subhd.cc",
+    "searchUrl": "https://subhd.cc/search/{id}",
+    "note": "中文 · SubHD 镜像域名，主域打不开时用"
+  },
+  {
+    "id": "opensuborg",
+    "name": "OpenSubtitles.org",
+    "url": "https://www.opensubtitles.org",
+    "searchUrl": "https://www.opensubtitles.org/zh/search/sublanguageid-chi/moviename-{id}",
+    "note": "全球 · 老站直链，可筛中文"
+  },
+  {
+    "id": "sehuasub",
+    "name": "色花堂 字幕区",
+    "url": "https://www.sehuatang.net",
+    "searchUrl": "https://www.sehuatang.net/search.php?mod=forum&srchtxt={id}",
+    "note": "中文 · 论坛字幕区，AV 中字更新快"
+  },
+  {
+    "id": "javsubs",
+    "name": "JavSubs 字幕库",
+    "url": "https://javsubs.com",
+    "searchUrl": "https://www.google.com/search?q=site%3Ajavsubs.com+{id}",
+    "note": "JAV 专用 · 番号字幕归档，走站内检索"
+  },
+  {
+    "id": "subscene",
+    "name": "Subscene",
+    "url": "https://subscene.com",
+    "searchUrl": "https://subscene.com/subtitles/searchbytitle?query={id}",
+    "note": "全球 · 老牌影视字幕站，电影/剧集多语"
+  },
+  {
+    "id": "subtitleseeker",
+    "name": "Subtitleseeker",
+    "url": "https://www.subtitleseeker.com",
+    "searchUrl": "https://www.google.com/search?q=site%3Asubtitleseeker.com+{id}",
+    "note": "全球 · 字幕聚合检索，走谷歌站内检索"
+  },
+  {
+    "id": "subslikescript",
+    "name": "Subtitles Like Script",
+    "url": "https://www.subslikescript.com",
+    "searchUrl": "https://www.google.com/search?q=site%3Asubslikescript.com+{id}",
+    "note": "全球 · 电影台词/字幕脚本，走谷歌站内检索"
+  }
+]

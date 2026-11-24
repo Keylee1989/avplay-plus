@@ -1,0 +1,32 @@
+/* AvPlay+ · spec extras */
+.qbar2 { display: grid !important; grid-template-columns: repeat(2, 56px); gap: 6px; }
+.qbar2 button { width: 56px !important; height: 48px !important; padding: 2px !important; font-size: .64rem !important; text-align: center !important; border-radius: 10px !important; }
+.goldbtn.dragging { opacity: .9 !important; }
+.goldbtn.idle { opacity: .35; transition: opacity .6s; }
+.goldbtn { transition: opacity .25s; }
+.lockmask {
+  position: fixed; inset: 0; z-index: 65; background: transparent; cursor: not-allowed;
+}
+body.lockscreen .pl-wrap, body.lockscreen .pl-ctrl, body.lockscreen .sub-panel { pointer-events: none !important; }
+body.lockwindow .pl-mini { pointer-events: none !important; }
+.pl-chrome {
+  display: flex; align-items: center; gap: 6px; padding: 6px 8px; background: #5b626f;
+  color: #fff; font-size: .74rem; border-radius: 14px 14px 0 0;
+}
+.pl-chrome .dot { width: 8px; height: 8px; border-radius: 50%; background: #4cd964; }
+.pl-chrome .ttl { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pl-chrome button { width: 18px; height: 18px; border-radius: 50%; border: 0; padding: 0; font-size: .7rem; line-height: 1; color: #1c1c1c; }
+.pl-chrome .y { background: #ffbd2e; } .pl-chrome .g { background: #28c840; } .pl-chrome .r { background: #ff5f57; }
+.pl-chrome select { background: rgba(0,0,0,.25); color: #fff; border: 0; border-radius: 5px; font-size: .68rem; }
+.pl-chrome + .pl-wrap { border-radius: 0 0 14px 14px; }
+.ag-list .grid { grid-template-columns: 1fr !important; }
+.ag-list .card { display: flex; align-items: center; gap: 10px; }
+.ag-list .card .cover { width: 56px !important; aspect-ratio: 2/3; }
+.ag-list .card .body { flex: 1; }
+.panel-tabs { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.panel-tabs button { border: 1px solid var(--line); background: var(--card); color: var(--mute); border-radius: 9px; padding: 7px 10px; font-size: .8rem; }
+.panel-tabs button.on { background: var(--accent); color: #16130a; border-color: transparent; font-weight: 700; }
+.chong-mark { cursor: pointer; user-select: none; }
+.chong-mark.done { color: var(--ok); } .chong-mark.pending { color: var(--accent); }
+.ver-line { color: var(--mute); font-size: .72rem; margin-top: 10px; }
+.install-tip { border: 1px dashed var(--accent); border-radius: 12px; padding: 10px 12px; font-size: .82rem; line-height: 1.6; margin-bottom: 14px; }

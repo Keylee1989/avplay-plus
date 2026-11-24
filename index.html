@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0b0d12">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="AvPlay+">
+<meta name="description" content="聚合搜索 · 32 源字幕 · LTX 离线片库 · 多线路播放 · 收藏记录">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon.svg">
+<title>AvPlay+</title>
+<link rel="stylesheet" href="css/app.css">
+<link rel="stylesheet" href="css/extra.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brandrow">
+      <div class="brand">AvPlay<b>+</b><small>聚合 · 字幕 · 播放</small></div>
+      <div class="spacer"></div>
+      <button class="iconbtn" id="btnQuick" title="快捷条">⚡</button>
+      <button class="iconbtn" id="btnSettings" title="设置">⚙</button>
+    </div>
+    <div class="searchrow">
+      <div class="searchwrap">
+        <input id="globalSearch" type="text" placeholder="输入番号 / 片名，如 SSIS-001" autocomplete="off" enterkeyhint="search">
+        <button class="clear" id="btnClear" title="清空">×</button>
+      </div>
+      <button class="btn primary" id="btnSearch">搜索</button>
+    </div>
+    <nav class="tabs" id="tabs"></nav>
+  </header>
+
+  <main id="main">
+    <section class="view active" id="view-home"></section>
+    <section class="view" id="view-ltx"></section>
+    <section class="view" id="view-sub"></section>
+    <section class="view" id="view-play"></section>
+    <section class="view" id="view-javdb"></section>
+    <section class="view" id="view-rank"></section>
+    <section class="view" id="view-fav"></section>
+    <section class="view" id="view-history"></section>
+    <section class="view" id="view-tools"></section>
+    <section class="view" id="view-settings"></section>
+  </main>
+</div>
+
+<button class="goldbtn" id="goldBtn" title="快捷面板">✦</button>
+<div class="quickbar" id="quickBar">
+  <button data-act="home">🏠 聚合首页</button>
+  <button data-act="sub">📄 字幕搜索</button>
+  <button data-act="ltx">💎 LTX 片库</button>
+  <button data-act="fav">⭐ 我的收藏</button>
+  <button data-act="copycode">🔗 复制当前番号</button>
+  <button data-act="mini">🪟 小窗播放</button>
+</div>
+
+<nav class="bottomnav" id="bottomnav"></nav>
+<div id="modalRoot"></div>
+<div id="toastBox"></div>
+
+<script src="hls.min.js"></script>
+<script src="js/data.js"></script>
+<script src="js/ltx.js"></script>
+<script src="js/core.js"></script>
+<script src="js/subtitles.js"></script>
+<script src="js/player.js"></script>
+<script src="js/search.js"></script>
+<script src="js/adblock_data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/extra.js"></script>
+<script>
+if ('serviceWorker' in navigator && location.protocol !== 'file:') {
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('sw.js').catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
