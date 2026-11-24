@@ -376,11 +376,15 @@
         '<div class="li"><div class="grow"><div class="t">广告拦截</div><div class="s" id="adDesc">' + (AV_SETTINGS.adblock ? '已开启：拦截弹窗与常见广告域名' : '已关闭') + '</div></div><button class="switch ' + (AV_SETTINGS.adblock ? 'on' : '') + '" id="adSwitch"></button></div>' +
         '<div class="li"><div class="grow"><div class="t">资源统计</div><div class="s">' + A.D.sites.length + ' 站 · ' + A.D.subtitleSites.length + ' 字幕源 · ' + A.LTX.length + ' LTX 条目</div></div></div>' +
         '<div class="li"><div class="grow"><div class="t">数据源</div><div class="s">全部站点 / 字幕源 / 接口来自 手艺活 v1.3 脚本原文，未猜测未编造</div></div></div>' +
+        '<div class="li"><div class="grow"><div class="t">MikuTools JAV 搜索（你的会员）</div><div class="s">okmiku.com · JP/US 第三方源 + 磁力；登录后搜，把番号/磁力复制回本 App</div></div><button class="btn small" id="toolMiku">打开</button></div>' +
       '</div>' +
       '<div class="divider"></div>' +
       '<p class="hint">说明：本站为纯前端 PWA。字幕/站点的跨域抓取依赖浏览器 CORS，失败时可在设置里填 CORS 代理；' +
       'JavRanking 走脚本自带的 app.keylee.eu.cc Worker，通常可直接请求。播放地址由你提供或来自网关。</p>';
     $('#toolImport').addEventListener('click', importDialog);
+    $('#toolMiku').addEventListener('click', function () {
+      A.openExternal('https://okmiku.com/t/jav-search');
+    });
     $('#toolExport').addEventListener('click', function () {
       var data = {
         sites: A.store.get('customSites', []),
